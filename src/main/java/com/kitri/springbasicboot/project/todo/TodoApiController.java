@@ -18,6 +18,7 @@ public class TodoApiController {
     //저장
     @PostMapping("/save")
     public boolean add(@RequestBody Todo todo) {
+        todo.setId(id);
         return todos.put(id++, todo) != null ? true : false;
     }
     //상태변경

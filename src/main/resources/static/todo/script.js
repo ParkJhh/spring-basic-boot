@@ -3,7 +3,9 @@ const api = "/api/todos"
 async function First(){
     let res = await fetch(api);
     data = await res.json();
-
+    //태그 초기화
+    document.querySelector('#todos').innerHTML = "";
+    //초기화 이후
     let count = 0;
     let viewHtml = ``;
     for(i in data){
@@ -32,17 +34,17 @@ form.addEventListener("submit", event => {
     let ans = document.getElementById("input")
     let todo = ans.value;
     //데이터 흘러들어오는 것 확인
-    add(todo)
+    add(todo);
 })
 //폼태그로 받은 데이터 추가
 async function add(todo){
     let addRes = await fetch(api + "/save",{ method: 'POST',headers:{'Content-type' : 'application/json'},
         body: JSON.stringify({
-            // id : count,
             todo : todo,
             chk : "false"
-        })});
-
+        })}).then((res) => {
+            First();
+        });
 }
 //버블링 이벤트리스너로 취소선 추가 및 상태 함수 호출
 document.querySelector("#todos").addEventListener('click',(event)=>{
@@ -61,7 +63,7 @@ async function chkTrue(k){
         body: JSON.stringify({
             id : k,
             chk : "true"
-        })});
+        })})
 }
 //이벤트리스너로 취소선 추가후 상태를 false
 async function chkFalse(k){
@@ -69,7 +71,7 @@ async function chkFalse(k){
         body: JSON.stringify({
             id : k,
             chk : "false"
-        })});
+        })})
 }
 //버블링 이벤트리스너로 삭제 함수 호출
 document.querySelector("#todos").addEventListener('contextmenu',(event)=>{
@@ -85,6 +87,8 @@ async function deleteli(status,x){
             body: JSON.stringify({
                 id: x
             })
+        }).then((res) => {
+            First();
         });
     } else {
         alert("ToDolist 완료 후 우클릭으로 삭제하셈")
