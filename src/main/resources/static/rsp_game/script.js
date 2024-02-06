@@ -2,10 +2,9 @@ const api = "/api/rsp"
 let winCount = 0;
 let loseCount = 0;
 let drawCount =0;
+
 //초기화면
-async function First(){
-    let res = await fetch(api);
-    data = await res.json();
+function First(){
     //초기화
     document.querySelector('#count').innerHTML = "";
 
@@ -83,7 +82,7 @@ function rspMatch(humanChoice){
 }
 //가위바위보 결과에 따른 css스타일 적용 0이면 무승부,1이면 사람, 2이면 컴퓨터
 async function rspStyle(x){
-    let res = await fetch(api);
+    let res = await fetch(api + "/x");
     data = await res.json();
     //초기화
     document.querySelector('#you').className = ""

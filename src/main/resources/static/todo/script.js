@@ -38,7 +38,8 @@ form.addEventListener("submit", event => {
 })
 //폼태그로 받은 데이터 추가
 async function add(todo){
-    let addRes = await fetch(api + "/save",{ method: 'POST',headers:{'Content-type' : 'application/json'},
+    let addRes = await fetch(api + "/save",{
+        method: 'POST',headers:{'Content-type' : 'application/json'},
         body: JSON.stringify({
             todo : todo,
             chk : "false"
