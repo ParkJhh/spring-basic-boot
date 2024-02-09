@@ -9,9 +9,9 @@ async function First(){
     let count = 0;
     let viewHtml = ``;
     for(i in data){
-        let chk = data[count].chk;
+        let chk = data[count].done;
         viewHtml += `
-        <li class="${classChk(chk)}"><input type="hidden" value="${data[count].id}">${data[count].todo}</li>
+        <li class="${classChk(chk)}"><input type="hidden" value="${data[count].id}">${data[count].content}</li>
     `;
         count++;
     }
@@ -22,7 +22,7 @@ async function First(){
 First();
 //취소선 값 확인하여 클래스명 지정
 function classChk(chk){
-    if(chk === "true"){
+    if(chk === true){
         return "completed"
     } else {
         return ""
@@ -41,8 +41,8 @@ async function add(todo){
     let addRes = await fetch(api + "/save",{
         method: 'POST',headers:{'Content-type' : 'application/json'},
         body: JSON.stringify({
-            todo : todo,
-            chk : "false"
+            content : todo,
+            done : false
         })}).then((res) => {
             First();
         });
@@ -60,18 +60,18 @@ document.querySelector("#todos").addEventListener('click',(event)=>{
 })
 //이벤트리스너로 취소선 추가후 상태를 true
 async function chkTrue(k){
-    let addRes = await fetch(api + "/chk",{ method: 'POST',headers:{'Content-type' : 'application/json'},
+    let addRes = await fetch(api + "/update",{ method: 'POST',headers:{'Content-type' : 'application/json'},
         body: JSON.stringify({
             id : k,
-            chk : "true"
+            done : true
         })})
 }
 //이벤트리스너로 취소선 추가후 상태를 false
 async function chkFalse(k){
-    let addRes = await fetch(api + "/chk",{ method: 'POST',headers:{'Content-type' : 'application/json'},
+    let addRes = await fetch(api + "/update",{ method: 'POST',headers:{'Content-type' : 'application/json'},
         body: JSON.stringify({
             id : k,
-            chk : "false"
+            done : false
         })})
 }
 //버블링 이벤트리스너로 삭제 함수 호출

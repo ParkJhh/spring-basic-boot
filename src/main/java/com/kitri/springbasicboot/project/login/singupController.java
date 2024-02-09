@@ -1,8 +1,4 @@
 package com.kitri.springbasicboot.project.login;
-
-import com.kitri.springbasicboot.lesson.reqres.Country;
-import com.kitri.springbasicboot.lesson.valid.dto.SingUpFormDto;
-import com.kitri.springbasicboot.project.todo.Todo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
