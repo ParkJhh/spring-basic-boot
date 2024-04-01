@@ -19,11 +19,16 @@ public class TodoApiController {
     public ArrayList<ResponseTodo> todos() {
         return (ArrayList<ResponseTodo>) todoMapper.findAll();
     }
+    @GetMapping("/{id}")
+    public ArrayList<ResponseTodo> todos(@PathVariable Long id) {
+        return (ArrayList<ResponseTodo>) todoMapper.findById(id);
+    }
     //저장
     @PostMapping("/save")
     public void add(@RequestBody RequestTodo todo) {
         todoMapper.save(todo);
     }
+
     //상태변경
     @PostMapping("/update")
     public void update(@RequestBody RequestTodo todo) {

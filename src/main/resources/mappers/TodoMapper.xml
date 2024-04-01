@@ -15,7 +15,7 @@
     </resultMap>
 
     <select id="findById" parameterType="Long" resultType="com.kitri.springbasicboot.lesson.mybatis.dto.ResponseTodo">
-        SELECT * FROM todo WHERE id = ${id}
+        SELECT * FROM todo WHERE memberid = ${id}
     </select>
 
 <!--    <select id="findAll" resultMap="todoResultMap">-->
@@ -48,5 +48,9 @@
         WHERE
             id = #{id}
     </delete>
+
+    <select id="loignchechk" resultType="com.kitri.springbasicboot.lesson.mybatis.dto.Member">
+       SELECT * FROM member
+    </select>
 
 </mapper>
